@@ -1,0 +1,117 @@
+[
+    {
+        "facilityId": 644,
+        "facilityCoordinateX": 3,
+        "facilityCoordinateY": 4,
+        "medications": [
+            {
+                "medicationId": 90,
+                "medicationPrice": 302.68
+            }
+        ]
+    },
+    {
+        "facilityId": 171,
+        "facilityCoordinateX": -6,
+        "facilityCoordinateY": 9,
+        "medications": [
+            {
+                "medicationId": 0,
+                "medicationPrice": 136.3
+            },
+            {
+                "medicationId": 100,
+                "medicationPrice": 308.59
+            },
+            {
+                "medicationId": 200,
+                "medicationPrice": 556.41
+            }
+        ]
+    },
+    {
+        "facilityId": 128,
+        "facilityCoordinateX": 0,
+        "facilityCoordinateY": 5,
+        "medications": [
+            {
+                "medicationId": 10,
+                "medicationPrice": 513.57
+            },
+            {
+                "medicationId": 11,
+                "medicationPrice": 956.3
+            },
+            {
+                "medicationId": 21,
+                "medicationPrice": 180.13
+            },
+            {
+                "medicationId": 31,
+                "medicationPrice": 316.18
+            },
+            {
+                "medicationId": 41,
+                "medicationPrice": 158.04
+            }
+        ]
+    },
+    {
+        "facilityId": 692,
+        "facilityCoordinateX": 6,
+        "facilityCoordinateY": 8,
+        "medications": [
+            {
+                "medicationId": 20,
+                "medicationPrice": 122.68
+            },
+            {
+                "medicationId": 12,
+                "medicationPrice": 851.58
+            },
+            {
+                "medicationId": 22,
+                "medicationPrice": 75.37
+            },
+            {
+                "medicationId": 32,
+                "medicationPrice": 643.93
+            },
+            {
+                "medicationId": 42,
+                "medicationPrice": 221.63
+            },
+            {
+                "medicationId": 52,
+                "medicationPrice": 612.72
+            },
+            {
+                "medicationId": 62,
+                "medicationPrice": 442.04
+            }
+        ]
+    },
+    {
+        "facilityId": 984,
+        "facilityCoordinateX": -1,
+        "facilityCoordinateY": -4,
+        "medications": [
+            {
+                "medicationId": 30,
+                "medicationPrice": 172.28
+            },
+            {
+                "medicationId": 13,
+                "medicationPrice": 370.85
+            },
+            {
+                "medicationId": 23,
+                "medicationPrice": 105.98
+            },
+            {
+                "medicationId": 33,
+                "medicationPrice": 659.94
+            }
+        ]
+    }
+]

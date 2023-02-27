@@ -1,0 +1,56 @@
+﻿
+<footer>
+	<div class="container text-light fs-5">
+		<div class="clearfix pt-5 pb-5">
+			<hr />
+			<h2>Introduction</h2>
+			<p>This is an implementation to iA's coding challenge made in a Blazor App.<br/>
+				</p>
+	  <hr />
+			<h2>Assumptions</h2>
+			<p>The following are some assumptions made:</p>
+			<ul>
+				<li>All Facilities and Medications each have unique key values</li>
+				<li>Edge cases for input coordinates exceeding are handled in the front end</li>
+				<li>FacilityRepository is set to retrieve both 'as-is' Facility entries and top 3 items with an ordered list of medications</li>
+				<li>Some data constraints for each Model are handled with data annotations like [Range]</li>
+				<li>Cases where Manhattan Distance is the same between two central fills, then the order will be determined by the ID
+					this could be modified to be based on Medication instead</li>
+			</ul>
+			<hr/>
+			<h2>Possible Changes</h2>
+			<p>Because this is a program operating with a in-memory database, I would modify the program
+				to include an actual connection string to a database to simulate a more realistic scenario
+				since in-memory would not be something feasible or secure to work with.<br/>
+				Another major change would be in the way the repository pattern is used - at the moment,
+				I am injecting <pre><code>FacilityRepository</code></pre>, Ideally I would take advantage of
+				the Controller I created and use a Service pattern instead to keep the fetching data better structured
+				and be able to take the advantage of a proper API call to avoid overwhelming the DB with direct calls.
+			</p>
+			<p>For cases where the code would be used on a higher traffic, I would optimize ways to access the
+				data by creating stored procedures inside the database, setup more security procedures for retrieving
+				data. And as mentioned before, using a proper API endpoint would ease network traffic and allow more flexibility
+				to the request (what if we want to look at all medications? )
+			</p>
+	  <hr />
+			<h2>Caveats</h2>
+			<ul>
+				<li>Random seed generation wasn't added due to time limitations</li>
+				<li>There are no 'duplicate' Medications (eg. if two instances of MedicationId = 2 exist, DbContext will immediately throw an error).
+					Did not have time to setup a stronger relational database for a one to many relation</li>
+				<li>In-memory database is a JSON file instead of a proper DB</li>
+				<li>Collision detection isn't 100% implemented, when calling methods from the FacilityRepository
+					will throw an error if things from data annotations are violated but not all cases are handled
+				</li>
+				<li>Did not contain the Facility List as its own Razor component</li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<aside class="text-center text-light fs-4 p-5" style="background:#8141f2">
+	<div>
+	<p>Created By: Adrian Salazar</p>
+	<p>Using Blazor C#</p>
+	</div>
+  
+</aside>

@@ -1,0 +1,124 @@
+﻿@page "/"
+@inherits FacilityListBase
+
+<PageTitle>iA Coding Challenge</PageTitle>
+<main>
+  <section id="coordinates" class="iAoverlay">
+	<div class="container text-center">
+	  <Introduction />
+	  <div class="row p-5 bg-secondary-subtle rounded fs-3">
+		<div class="col-6">
+		  <label for="xcoord" class="form-label fw-bold">X Coordinate</label>
+		  <input id="xcoord" type="number"
+			 class="form-control"
+			 @bind="@CoordinateX"
+			 @bind:event="oninput"
+			 min="-10" max="10" />
+		  <span class="form-text fs-6">Horizontal value coordinates, range from -10 to 10</span>
+		</div>
+		<div class="col-6">
+		  <label for="ycoord" class="form-label fw-bold">Y Coordinate</label>
+		  <input id="ycoord" type="number"
+			 class="form-control"
+			 @bind="@CoordinateY"
+			 @bind:event="oninput"
+			 min="-10" max="10" />
+		  <span class="form-text fs-6">Vertical value coordinates, range from -10 to 10</span>
+		</div>
+
+		<button class="btn btn-lg btn-primary col-6 mt-3 mx-auto btn-ia"
+				@onclick="FetchFacilities">
+		  Find closest Central Fills to (@CoordinateX, @CoordinateY)
+		</button>
+	  </div>
+	</div>
+  </section>
+  <section id="facilities" class="container mt-5">
+		@if (facilities == null)
+		{
+		<div>
+		  <div class="card fs-3" aria-hidden="true">
+			<div class="card-body">
+			  <h2 class="card-title placeholder-glow">
+				<span class="placeholder col-6"></span>
+			  </h2>
+			  <p class="card-text placeholder-glow">
+				<span class="placeholder col-7"></span>
+				<span class="placeholder col-4"></span>
+				<span class="placeholder col-4"></span>
+				<span class="placeholder col-6"></span>
+				<span class="placeholder col-8"></span>
+			  </p>
+
+			</div>
+		  </div>
+		</div>
+		}
+		else
+		{
+		<h2>List of the closest Central Fill Facilities</h2>
+		<div class="row mt-5">
+				@foreach (var facility in facilities)
+				{
+			  <div class="col-4 g-3" aria-hidden="true">
+				<div class="card">
+				  <img class="card-img-top" src="./cf.webp" alt="Card image cap">
+				  <div class="card-body">
+					<h3 class="card-title">
+					  Centrall Fill @facility.FacilityID
+					</h3>
+					<p class="card-text">
+					  Location: (<span class="fw-bold">
+										@facility.FacilityCoordinateX ,
+										@facility.FacilityCoordinateY
+					  </span>) - Distance @ManhattanDistance(facility.FacilityCoordinateX, facility.FacilityCoordinateY)
+					</p>
+						@if (facility.Medications != null)
+						{
+						<p class="fs-5">Cheapest medication available:</p>
+						<ul class="list-group list-group-flush">
+						  <li class="list-group-item">
+							$@facility.Medications.First().MedicationPrice, Medication @facility.Medications.First().MedicationID
+						  </li>
+							@*@foreach (var medication in facility.Medications)
+							{
+							  <li class="list-group-item">
+								$@medication.MedicationPrice, Medication @medication.MedicationID
+							  </li>
+							}*@
+						</ul>
+						}
+				  </div>
+				</div>
+
+			  </div>
+
+				}
+		</div>
+		}
+  </section>
+
+</main>
+
+
+@code {
+	[Parameter]
+	public IEnumerable<Models.Facility>? facilities { get; set; } = null;
+	[Parameter]
+	public int CoordinateX { get; set; } = 0;
+	[Parameter]
+	public int CoordinateY { get; set; } = 0;
+
+	public int ManhattanDistance(int x, int y)
+	{
+		return Math.Abs(CoordinateX - x) + Math.Abs(CoordinateY - y);
+	}
+
+	private async Task FetchFacilities()
+	{
+		//Using this as a 'refresh' effect to improve UX
+		facilities = null;
+		await Task.Delay(500);
+		facilities = (await FacilityRepository.GetTopThreeFacilities(CoordinateX, CoordinateY)).ToList();
+	}
+}
